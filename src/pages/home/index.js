@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 
@@ -13,11 +13,15 @@ function Home(){
     const [cep,setCep] = useState('');
     const [data,setData] = useState(null);
 
+    const inputRef = useRef();
+
   
     async function getCep(){
+
         if(cep === ''){
             return alert('Preencha os campos!')
         }
+
         try{
             const response = await api.get(`${cep}/json`);
             setData([response.data])
@@ -25,6 +29,9 @@ function Home(){
         }catch(err){
             alert(err);
         }
+
+        setCep('');
+        inputRef.current.focus();
         
     }
     return(
@@ -36,7 +43,8 @@ function Home(){
                 <input type="text" 
                        placeholder="Informe aqui seu cep apenas com números"
                        value={cep}
-                       onChange={ e => setCep(e.target.value) }        
+                       onChange={ e => setCep(e.target.value) }
+                       ref={inputRef}        
                 />
              
                 <button type="button" onClick={getCep}>
