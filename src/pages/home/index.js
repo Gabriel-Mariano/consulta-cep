@@ -25,9 +25,14 @@ function Home(){
         try{
             const response = await api.get(`${cep}/json`);
             setData([response.data])
-    //      console.log(data) 
+            // Verificar se existe o cep cadastrado
+            if(response.data.erro === true){
+                alert("Cep não encontrado na nossa base de dados!");
+            }
+            
+    //  console.log(response); 
         }catch(err){
-            alert(err);
+            alert("Formato inválido");
         }
 
         setCep('');
