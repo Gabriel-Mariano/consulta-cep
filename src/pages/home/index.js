@@ -6,6 +6,7 @@ import './style.css';
 import {FaSearchLocation} from 'react-icons/fa';
 
 import api from '../../services/api';
+import {useToasts} from 'react-toast-notifications';
 
 
 
@@ -14,12 +15,14 @@ function Home(){
     const [data,setData] = useState(null);
 
     const inputRef = useRef();
+    const {addToast} = useToasts(); 
 
   
     async function getCep(){
 
         if(cep === ''){
-            return alert('Preencha os campos!')
+            return addToast("Preencha os campos!",{ appearance: "warning"})
+
         }
 
         try{
@@ -27,12 +30,12 @@ function Home(){
             setData([response.data])
             // Verificar se existe o cep cadastrado
             if(response.data.erro === true){
-                alert("Cep não encontrado na nossa base de dados!");
+                addToast("Cep NÃO encontrado na nossa base de dados!",{ appearance: "info"})
             }
             
     //  console.log(response); 
         }catch(err){
-            alert("Formato inválido");
+            addToast("Formato inválido.",{ appearance: "error"})
         }
 
         setCep('');
