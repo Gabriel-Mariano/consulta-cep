@@ -1,6 +1,6 @@
-# Consulta Cep 
+# Consulta Cep 🗺
 
-![imagem-deslizante](https://github.com/Gabriel-Mariano/Slider/blob/master/slider.png)
+![web](https://github.com/Gabriel-Mariano/consulta-cep/blob/main/src/assets/preview.jpg)
 
 ## Visão Global
 
